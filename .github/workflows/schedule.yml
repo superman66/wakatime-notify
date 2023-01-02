@@ -1,0 +1,15 @@
+name: WakaTime Notify
+on:
+  schedule:
+    - cron: '40 1 * * *'
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: WakaTime notify
+        uses: superman66/wakatime-notify@master
+        env:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
