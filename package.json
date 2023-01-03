@@ -2,14 +2,14 @@
   "name": "wakatime-notify",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "pretest": "npm run lint",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup index.js",
     "posttest": "npm run format",
     "lint": "eslint . --cache --fix --ext .ts,.tsx",
-    "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\""
+    "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
+    "pretest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -23,14 +23,10 @@
   },
   "homepage": "https://github.com/superman66/wakatime-notify#readme",
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.47.1",
-    "@typescript-eslint/parser": "^5.47.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.31.0",
     "prettier": ">=2",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
+    "tsup": "^6.5.0"
   },
   "dependencies": {
     "axios": "^1.2.2",
