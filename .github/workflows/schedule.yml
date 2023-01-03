@@ -1,15 +1,29 @@
 name: WakaTime Notify
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '40 1 * * *'
+    
 jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: WakaTime notify
-        uses: superman66/wakatime-notify@master
+      - name: Checkout
+        uses: actions/checkout@main
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.0.2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: pnpm install
+      - run: pnpm run build
+      - run: node dist/index.cjs
+
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
